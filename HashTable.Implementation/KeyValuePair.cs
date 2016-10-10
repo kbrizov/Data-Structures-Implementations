@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace HashTable.Implementation
+﻿namespace HashTable.Implementation
 {
     public class KeyValuePair<TKey, TValue>
     {
