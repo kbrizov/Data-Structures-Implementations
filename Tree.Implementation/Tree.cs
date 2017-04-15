@@ -49,6 +49,8 @@ namespace Tree.Implementation
                 TraverseUsingDepthFirst(childNode, action);
             }
 
+            // The commented code is an iterative implementation of DFS.
+
             //Stack<TreeNode<T>> frontier = new Stack<TreeNode<T>>();
             //frontier.Push(node);
 
