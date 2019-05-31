@@ -28,8 +28,18 @@ namespace CustomDataStructures
         {
         }
 
+        public Heap(Comparison<T> comparison)
+            : this(Comparer<T>.Create(comparison))
+        {
+        }
+
         public Heap(IComparer<T> comparer)
             : this(INITIAL_CAPACITY, comparer)
+        {
+        }
+
+        public Heap(int capacity, Comparison<T> comparison)
+            : this(capacity, Comparer<T>.Create(comparison))
         {
         }
 
@@ -52,6 +62,11 @@ namespace CustomDataStructures
 
         public Heap(IEnumerable<T> collection) 
             : this(collection, Comparer<T>.Default)
+        {
+        }
+
+        public Heap(IEnumerable<T> collection, Comparison<T> comparison)
+            : this(collection, Comparer<T>.Create(comparison))
         {
         }
 
