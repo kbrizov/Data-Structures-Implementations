@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace Graph.Implementation
 {
@@ -43,11 +43,7 @@ namespace Graph.Implementation
             var end = graph.GetNode("g");
 
             var path = FindCheapestPath(start, end, graph);
-
-            foreach (var item in path)
-            {
-                Console.WriteLine(item);
-            }
+            DisplayPath(path);
 
             //var graph = new UndirectedGraph<int>();
 
@@ -57,7 +53,7 @@ namespace Graph.Implementation
             //graph.AddNode(4);
             //graph.AddNode(5);
 
-            //graph.AddEdge(1, 2, weight: 40);
+            //graph.AddEdge(1, 2, weight: 4);
             //graph.AddEdge(1, 4, weight: 8);
             //graph.AddEdge(2, 3, weight: 3);
             //graph.AddEdge(3, 4, weight: 4);
@@ -67,13 +63,9 @@ namespace Graph.Implementation
             //var end = graph.GetNode(3);
 
             //var path = FindCheapestPath(start, end, graph);
+            //DisplayPath(path);
 
-            //foreach (var item in path)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            TraverseUsingDepthFirst(start, (TNode) => Console.Write("{0} ", TNode.Value));
+            //TraverseUsingDepthFirst(start, (TNode) => Console.Write("{0} ", TNode.Value));
             //Console.WriteLine();
             //TraverseUsingBreathFirst(one, (TNode) => Console.Write("{0} ", TNode.Value));
         }
@@ -89,7 +81,7 @@ namespace Graph.Implementation
             while (frontier.Count > 0)
             {
                 var currentNode = frontier.Pop();
-               
+
                 action(currentNode);
 
                 foreach (var edge in currentNode.Edges)
@@ -107,7 +99,7 @@ namespace Graph.Implementation
         {
             var frontier = new Queue<Node<TNode>>();
             frontier.Enqueue(node);
-           
+
             var visitedNodes = new HashSet<Node<TNode>>();
             visitedNodes.Add(node);
 
@@ -204,7 +196,7 @@ namespace Graph.Implementation
         }
 
         /// <summary>
-        /// Finds the cheapest path with specified start and end using the Dijkstra algorithm.
+        /// Finds the cheapest path with specified start and end using the Dijkstra algorithm (AKA Uniform Cost Search).
         /// </summary>
         /// <typeparam name="TNode">The value contained in the node.</typeparam>
         /// <param name="start">The start node.</param>
@@ -235,9 +227,11 @@ namespace Graph.Implementation
                 while (prioritizedEdges.Count > 0)
                 {
                     var edge = prioritizedEdges.Dequeue();
+
+                    var currentCost = costs[edge.Target];
                     var newCost = costs[currentNode] + edge.Weight;
 
-                    if (newCost < costs[edge.Target])
+                    if (newCost < currentCost)
                     {
                         costs[edge.Target] = newCost;
 
@@ -297,6 +291,22 @@ namespace Graph.Implementation
             }
 
             return costs;
+        }
+
+        private static void DisplayPath<TNode>(IEnumerable<Node<TNode>> path)
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append("Path: ");
+
+            foreach (var node in path)
+            {
+                result.Append($"{node.ToString()} ");
+            }
+
+            result.AppendLine();
+
+            Console.Write(result);
         }
     }
 }
