@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace CustomDataStructures
 {
     /// <summary>
-    /// A binary max heap by default (array implementation).
+    /// A binary max heap by default (array implementation). Note that it's not stable. Elements with the same priority can be swapped.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class Heap<T>

@@ -139,9 +139,11 @@ namespace Graph.Implementation
                 while (prioritizedEdges.Count > 0)
                 {
                     var edge = prioritizedEdges.Dequeue();
+
+                    var currentCost = costs[edge.Target];
                     var newCost = costs[currentNode] + edge.Weight;
 
-                    if (newCost < costs[edge.Target])
+                    if (newCost < currentCost)
                     {
                         costs[edge.Target] = newCost;
                     }
